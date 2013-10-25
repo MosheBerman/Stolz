@@ -14,6 +14,15 @@
 		46CE6721181A16C200382501 /* libStolz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE6708181A16C200382501 /* libStolz.a */; };
 		46CE6727181A16C200382501 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46CE6725181A16C200382501 /* InfoPlist.strings */; };
 		46CE6729181A16C200382501 /* StolzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE6728181A16C200382501 /* StolzTests.m */; };
+		46CE6735181A17F100382501 /* STLoginDirector.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE6733181A17F100382501 /* STLoginDirector.h */; };
+		46CE6736181A17F100382501 /* STLoginDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE6734181A17F100382501 /* STLoginDirector.m */; };
+		46CE673C181A1FC700382501 /* STTokenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE673A181A1FC700382501 /* STTokenManager.h */; };
+		46CE673D181A1FC700382501 /* STTokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE673B181A1FC700382501 /* STTokenManager.m */; };
+		46CE6740181A202A00382501 /* STToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE673E181A202A00382501 /* STToken.h */; };
+		46CE6741181A202A00382501 /* STToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE673F181A202A00382501 /* STToken.m */; };
+		46CE6744181A21AD00382501 /* STTokenPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE6742181A21AD00382501 /* STTokenPair.h */; };
+		46CE6745181A21AD00382501 /* STTokenPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE6743181A21AD00382501 /* STTokenPair.m */; };
+		46CE674D181A227000382501 /* STURLs.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE674C181A227000382501 /* STURLs.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +49,16 @@
 		46CE6724181A16C200382501 /* StolzTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StolzTests-Info.plist"; sourceTree = "<group>"; };
 		46CE6726181A16C200382501 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		46CE6728181A16C200382501 /* StolzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StolzTests.m; sourceTree = "<group>"; };
+		46CE6732181A16DB00382501 /* STLoginStates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = STLoginStates.h; path = Headers/STLoginStates.h; sourceTree = "<group>"; };
+		46CE6733181A17F100382501 /* STLoginDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STLoginDirector.h; path = Classes/STLoginDirector.h; sourceTree = "<group>"; };
+		46CE6734181A17F100382501 /* STLoginDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STLoginDirector.m; path = Classes/STLoginDirector.m; sourceTree = "<group>"; };
+		46CE673A181A1FC700382501 /* STTokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STTokenManager.h; path = Classes/STTokenManager.h; sourceTree = "<group>"; };
+		46CE673B181A1FC700382501 /* STTokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STTokenManager.m; path = Classes/STTokenManager.m; sourceTree = "<group>"; };
+		46CE673E181A202A00382501 /* STToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STToken.h; path = Classes/STToken.h; sourceTree = "<group>"; };
+		46CE673F181A202A00382501 /* STToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STToken.m; path = Classes/STToken.m; sourceTree = "<group>"; };
+		46CE6742181A21AD00382501 /* STTokenPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STTokenPair.h; path = Classes/STTokenPair.h; sourceTree = "<group>"; };
+		46CE6743181A21AD00382501 /* STTokenPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STTokenPair.m; path = Classes/STTokenPair.m; sourceTree = "<group>"; };
+		46CE674C181A227000382501 /* STURLs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STURLs.h; path = Headers/STURLs.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +127,10 @@
 			children = (
 				46CE6714181A16C200382501 /* Stolz.h */,
 				46CE6715181A16C200382501 /* Stolz.m */,
+				46CE6747181A224800382501 /* Headers */,
+				46CE6733181A17F100382501 /* STLoginDirector.h */,
+				46CE6734181A17F100382501 /* STLoginDirector.m */,
+				46CE6746181A224200382501 /* Tokens */,
 				46CE6712181A16C200382501 /* Supporting Files */,
 			);
 			path = Stolz;
@@ -139,6 +162,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		46CE6746181A224200382501 /* Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				46CE673A181A1FC700382501 /* STTokenManager.h */,
+				46CE673B181A1FC700382501 /* STTokenManager.m */,
+				46CE673E181A202A00382501 /* STToken.h */,
+				46CE673F181A202A00382501 /* STToken.m */,
+				46CE6742181A21AD00382501 /* STTokenPair.h */,
+				46CE6743181A21AD00382501 /* STTokenPair.m */,
+			);
+			name = Tokens;
+			sourceTree = "<group>";
+		};
+		46CE6747181A224800382501 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				46CE6732181A16DB00382501 /* STLoginStates.h */,
+				46CE674C181A227000382501 /* STURLs.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -146,6 +191,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CE6740181A202A00382501 /* STToken.h in Headers */,
+				46CE6735181A17F100382501 /* STLoginDirector.h in Headers */,
+				46CE674D181A227000382501 /* STURLs.h in Headers */,
+				46CE673C181A1FC700382501 /* STTokenManager.h in Headers */,
+				46CE6744181A21AD00382501 /* STTokenPair.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CE6745181A21AD00382501 /* STTokenPair.m in Sources */,
+				46CE6741181A202A00382501 /* STToken.m in Sources */,
+				46CE673D181A1FC700382501 /* STTokenManager.m in Sources */,
+				46CE6736181A17F100382501 /* STLoginDirector.m in Sources */,
 				46CE6716181A16C200382501 /* Stolz.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
