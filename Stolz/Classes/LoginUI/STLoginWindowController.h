@@ -8,6 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "STLoginControllerWindowDelegate.h"
+
 @interface STLoginWindowController : NSWindowController
+
+/**
+ *  The delegate will be informed when the loading changes.
+ */
+@property (assign) id<STLoginControllerWindowDelegate> delegate;
+
+/**
+ *  Loads a specified URL into the browser frame.
+ *
+ *  @param the url to load.
+ */
+
+- (void)loadURL:(NSURL *)url;
 
 @end
