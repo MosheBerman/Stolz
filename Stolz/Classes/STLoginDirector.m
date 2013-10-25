@@ -134,14 +134,57 @@
 - (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token withExpirationInterval:(NSInteger)interval
 {
     /**
-     *  TODO: Properly store permissions here.
+     *  Properly store permissions here.
      */
+    
+    /** Calculate the expiration date. */
+    NSDate *expirationDate = [[NSDate date] dateByAddingTimeInterval:interval];
+    
+    /** Build a URL to confirm the token's validity. */
+    NSURL *tokenConfirmationURL = [NSURL URLWithString:[NSString stringWithFormat:kTokenInspectionURL, token, self.facebookAppID]];
+    
+    /** Put the URL into a request. */
+    NSURLRequest *request = [NSURLRequest requestWithURL:tokenConfirmationURL];
+    
+    /** A flag to store success/failure in. */
+    __block BOOL success = YES;
+    
+    /** Fire off the request. */
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        
+        if (!error && data) {
+            
+            /** Attempt to read the JSON data into a dictionary. */
+            NSDictionary *validationResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            
+            /** If we've got a dictionary, let's check it out. */
+            if (!error) {
+                
+                /** "Unpack" the response from the data wrapper. */
+                validationResponse = validationResponse[@"data"];
+                
+                
+                /**
+                 *  Store this token in the token manager.
+                 */
+                
+                /**
+                 *  TODO: Read up on long-lived tokens:
+                 *  https://developers.facebook.com/docs/facebook-login/access-tokens/#extending
+                 */
+                
+            }
+        }
+        else {
+            success = !error;
+        }
+        
+    }];
     
     /** 
      *  Save the state.
      */
-    
-    self.state = STLoginStateLoggedIn;
+    self.state = success ? STLoginStateLoggedIn : STLoginStateLoggedNotAuthorized;
     
     /**
      *  Then call the callback.
