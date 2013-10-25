@@ -17,6 +17,6 @@
  *  {token-to-inspect}
  *  {app-token-or-admin-token}
  */
-#define kTokenInspectionURL @"graph.facebook.com/debug_token?input_token=%@&access_token=%@"
+#define kTokenInspectionURL @"https://graph.facebook.com/debug_token?input_token=%@&access_token=%@"
 
 #endif
