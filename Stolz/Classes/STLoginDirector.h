@@ -25,6 +25,12 @@
 @interface STLoginDirector : NSObject
 
 /**
+ *  @return a singleton login director instance
+ */
+
++ (id)shareDirector;
+
+/**
  *  Checking login status
  *
  */

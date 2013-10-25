@@ -10,9 +10,11 @@
 
 #import "STTokenManager.h"
 
+#import "STLoginWindowController.h"
+
 #import "STURLs.h"
 
-@interface STLoginDirector ()
+@interface STLoginDirector () <STLoginControllerWindowDelegate>
 
 /** Stores the user's login state. */
 @property (assign) enum STLoginState state;
@@ -25,9 +27,51 @@
  */
 @property (strong) NSString *facebookAppID;
 
+/**
+ *  An internal login window instance
+ */
+@property (strong) STLoginWindowController *loginWindowController;
+
+/**
+ *  Hang on to the login completion block
+ */
+@property (strong) STLoginCompletionBlock loginCompletion;
+
+/**
+ *  Hang on to the logout completion block
+ */
+@property (strong) STLoginCompletionBlock logoutCompletion;
+
 @end
 
 @implementation STLoginDirector
+
+/** Designated initializer. */
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _loginWindowController = [[STLoginWindowController alloc] init];
+        _loginWindowController.delegate = self;
+    }
+    return self;
+}
+
+/**
+ *  @return a singleton login director instance
+ */
+
++ (id)shareDirector
+{
+    static STLoginDirector *director = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        director = [[STLoginDirector alloc] init];
+    });
+    
+    return director;
+}
 
 /**
  *  Checks if the user is logged in.
@@ -59,10 +103,54 @@
 
 - (void)logUserInWithCompletion:(STLoginCompletionBlock)completion
 {
-    
     NSString *loginString = [NSString stringWithFormat:kLoginDialogURL, self.facebookAppID, kRedirectURI];
     NSURL *loginURL = [NSURL URLWithString:loginString];
-    [[NSWorkspace sharedWorkspace] openURL:loginURL];
+    
+    /**
+     *  Prepare and load the login window
+     */
+    [[self loginWindowController] showWindow:self];
+    [[self loginWindowController] loadURL:loginURL];
+}
+
+/**
+ *  STLoginWindowViewControllerDelegate
+ */
+
+- (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token
+{
+    /**
+     *  TODO: Properly store permissions here.
+     */
+    
+    /** 
+     *  Save the state.
+     */
+    
+    self.state = STLoginStateLoggedIn;
+    
+    /**
+     *  Then call the callback.
+     */
+    if (self.loginCompletion) {
+        self.loginCompletion(YES, self.state);
+    }
+}
+
+- (void)loginControllerFailedToAcquireToken:(STLoginWindowController *)loginWindowController withError:(NSError *)error
+{
+    /**
+     *  Save the state.
+     */
+    
+    self.state = STLoginStateLoggedOut;
+    
+    /**
+     *  Then call the callback.
+     */
+    if (self.logoutCompletion) {
+        self.logoutCompletion(YES, self.state);
+    }
 }
 
 /**
