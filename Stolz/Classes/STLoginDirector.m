@@ -129,6 +129,9 @@
 
 /**
  *  STLoginWindowViewControllerDelegate
+ *  TODO: Change this so the web browser 
+ *  passes back the URL that it received.
+ *  This will make an iOS port easier.
  */
 
 - (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token withExpirationInterval:(NSInteger)interval
@@ -165,7 +168,7 @@
                 
                 
                 /**
-                 *  Store this token in the token manager.
+                 *  TODO: Store this token in the token manager.
                  */
                 
                 /**
