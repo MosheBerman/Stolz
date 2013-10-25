@@ -13,7 +13,9 @@
 @protocol STLoginControllerWindowDelegate <NSObject>
 
 /** Called when the login successfully acquired a token. */
-- (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token;
+- (void)loginController:(STLoginWindowController *)loginWindowController
+        didAcquireToken:(NSString *)token
+ withExpirationInterval:(NSInteger)interval;
 
 /**
  *  Called when the login failed to acquire a token. Query the error's userInfo for more.
