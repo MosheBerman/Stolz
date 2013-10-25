@@ -51,8 +51,8 @@
 {
     self = [super init];
     if (self) {
-        _loginWindowController = [[STLoginWindowController alloc] init];
-        _loginWindowController.delegate = self;
+        
+        _loginWindowController = [[STLoginWindowController alloc] initWithWindowNibName:@"STLoginWindowController"];
     }
     return self;
 }
@@ -61,7 +61,7 @@
  *  @return a singleton login director instance
  */
 
-+ (id)shareDirector
++ (id)sharedDirector
 {
     static STLoginDirector *director = nil;
     
@@ -103,21 +103,35 @@
 
 - (void)logUserInWithCompletion:(STLoginCompletionBlock)completion
 {
+    
+    /**
+     *  Hang on to the completion.
+     */
+    
+    self.loginCompletion = completion;
+    
+    /**
+     *  Perform the login.
+     */
+    
     NSString *loginString = [NSString stringWithFormat:kLoginDialogURL, self.facebookAppID, kRedirectURI];
     NSURL *loginURL = [NSURL URLWithString:loginString];
     
     /**
      *  Prepare and load the login window
      */
-    [[self loginWindowController] showWindow:self];
+    [[self loginWindowController] setDelegate:self];
+    [[self loginWindowController] showWindow:nil];
     [[self loginWindowController] loadURL:loginURL];
+
 }
+
 
 /**
  *  STLoginWindowViewControllerDelegate
  */
 
-- (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token
+- (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token withExpirationInterval:(NSInteger)interval
 {
     /**
      *  TODO: Properly store permissions here.
@@ -132,6 +146,7 @@
     /**
      *  Then call the callback.
      */
+    
     if (self.loginCompletion) {
         self.loginCompletion(YES, self.state);
     }

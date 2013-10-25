@@ -28,7 +28,7 @@
  *  @return a singleton login director instance
  */
 
-+ (id)shareDirector;
++ (id)sharedDirector;
 
 /**
  *  Checking login status
