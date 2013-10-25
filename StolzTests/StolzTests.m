@@ -47,6 +47,7 @@
  *  Test URL Parsing
  */
 
+/** Some URLs have no query string at all. */
 - (void) testURLParsingFromQuerylessURL
 {
     
@@ -57,6 +58,7 @@
     XCTAssertTrue(parameters == nil, @"");
 }
 
+/** Occasionally we'll get a URL with a query seperator but no query. */
 - (void) testURLParsingFromURLWithEmptyQuery
 {
     
@@ -67,6 +69,7 @@
     XCTAssertTrue(parameters == nil, @"");
 }
 
+/** Some URLs are just perfect. What does the fox say? */
 - (void) testURLParsingFromURLWithPerfectQuery
 {
     
@@ -77,6 +80,7 @@
     XCTAssertTrue(parameters != nil, @"");
 }
 
+/** Some URLs have epty queries. */
 - (void) testURLParsingFromURLWithImperfectQuery
 {
     
