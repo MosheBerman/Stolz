@@ -10,9 +10,13 @@
 
 #import "STURLParser.h"
 
+#import "STApplicationConstants.h"
+
 @interface StolzTests : XCTestCase
 
 @property (strong) STURLParser *parser;
+
+@property (strong) STLoginDirector *loginDirector;
 
 @end
 
@@ -23,6 +27,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     _parser = [[STURLParser alloc] init];
+    _loginDirector = [[STLoginDirector alloc] init];
 }
 
 - (void)tearDown
@@ -90,6 +95,7 @@
     
     XCTAssertTrue([parameters[@"q"] isEqualTo:@""], @"");
 }
+
 
 
 @end

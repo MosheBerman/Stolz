@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4664BA6F181A440700DD4B2F /* StolzKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4664BA6E181A440700DD4B2F /* StolzKit.h */; };
 		46CE670C181A16C200382501 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE670B181A16C200382501 /* Cocoa.framework */; };
-		46CE6716181A16C200382501 /* Stolz.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE6715181A16C200382501 /* Stolz.m */; };
 		46CE671D181A16C200382501 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE671C181A16C200382501 /* XCTest.framework */; };
 		46CE671E181A16C200382501 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE670B181A16C200382501 /* Cocoa.framework */; };
 		46CE6721181A16C200382501 /* libStolz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE6708181A16C200382501 /* libStolz.a */; };
@@ -23,6 +23,13 @@
 		46CE6744181A21AD00382501 /* STTokenPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE6742181A21AD00382501 /* STTokenPair.h */; };
 		46CE6745181A21AD00382501 /* STTokenPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE6743181A21AD00382501 /* STTokenPair.m */; };
 		46CE674D181A227000382501 /* STURLs.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE674C181A227000382501 /* STURLs.h */; };
+		46CE674F181A25C000382501 /* STHandlers.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE674E181A25C000382501 /* STHandlers.h */; };
+		46CE6753181A309800382501 /* STLoginWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE6750181A309800382501 /* STLoginWindowController.h */; };
+		46CE6754181A309800382501 /* STLoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE6751181A309800382501 /* STLoginWindowController.m */; };
+		46CE6757181A330F00382501 /* STLoginControllerWindowDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE6756181A330F00382501 /* STLoginControllerWindowDelegate.h */; };
+		46CE675B181A350A00382501 /* STURLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE6759181A350A00382501 /* STURLParser.h */; };
+		46CE675C181A350A00382501 /* STURLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CE675A181A350A00382501 /* STURLParser.m */; };
+		46CE675F181A407F00382501 /* STApplicationConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 46CE675E181A407F00382501 /* STApplicationConstants.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,14 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4664BA6E181A440700DD4B2F /* StolzKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StolzKit.h; path = Stolz/StolzKit.h; sourceTree = "<group>"; };
 		46CE6708181A16C200382501 /* libStolz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStolz.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CE670B181A16C200382501 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		46CE670E181A16C200382501 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		46CE670F181A16C200382501 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		46CE6710181A16C200382501 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		46CE6713181A16C200382501 /* Stolz-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Stolz-Prefix.pch"; sourceTree = "<group>"; };
-		46CE6714181A16C200382501 /* Stolz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stolz.h; sourceTree = "<group>"; };
-		46CE6715181A16C200382501 /* Stolz.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Stolz.m; sourceTree = "<group>"; };
 		46CE671B181A16C200382501 /* StolzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StolzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CE671C181A16C200382501 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		46CE6724181A16C200382501 /* StolzTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StolzTests-Info.plist"; sourceTree = "<group>"; };
@@ -59,6 +65,14 @@
 		46CE6742181A21AD00382501 /* STTokenPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STTokenPair.h; path = Classes/STTokenPair.h; sourceTree = "<group>"; };
 		46CE6743181A21AD00382501 /* STTokenPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STTokenPair.m; path = Classes/STTokenPair.m; sourceTree = "<group>"; };
 		46CE674C181A227000382501 /* STURLs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STURLs.h; path = Headers/STURLs.h; sourceTree = "<group>"; };
+		46CE674E181A25C000382501 /* STHandlers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STHandlers.h; path = Headers/STHandlers.h; sourceTree = "<group>"; };
+		46CE6750181A309800382501 /* STLoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STLoginWindowController.h; path = Classes/LoginUI/STLoginWindowController.h; sourceTree = "<group>"; };
+		46CE6751181A309800382501 /* STLoginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STLoginWindowController.m; path = Classes/LoginUI/STLoginWindowController.m; sourceTree = "<group>"; };
+		46CE6752181A309800382501 /* STLoginWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = STLoginWindowController.xib; path = Classes/LoginUI/STLoginWindowController.xib; sourceTree = "<group>"; };
+		46CE6756181A330F00382501 /* STLoginControllerWindowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STLoginControllerWindowDelegate.h; path = Headers/STLoginControllerWindowDelegate.h; sourceTree = "<group>"; };
+		46CE6759181A350A00382501 /* STURLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STURLParser.h; path = "Classes/URL Parser/STURLParser.h"; sourceTree = "<group>"; };
+		46CE675A181A350A00382501 /* STURLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STURLParser.m; path = "Classes/URL Parser/STURLParser.m"; sourceTree = "<group>"; };
+		46CE675E181A407F00382501 /* STApplicationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STApplicationConstants.h; path = Headers/STApplicationConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +100,7 @@
 		46CE66FF181A16C200382501 = {
 			isa = PBXGroup;
 			children = (
+				4664BA6E181A440700DD4B2F /* StolzKit.h */,
 				46CE6711181A16C200382501 /* Stolz */,
 				46CE6722181A16C200382501 /* StolzTests */,
 				46CE670A181A16C200382501 /* Frameworks */,
@@ -125,11 +140,9 @@
 		46CE6711181A16C200382501 /* Stolz */ = {
 			isa = PBXGroup;
 			children = (
-				46CE6714181A16C200382501 /* Stolz.h */,
-				46CE6715181A16C200382501 /* Stolz.m */,
+				46CE675D181A351100382501 /* URL Parser */,
 				46CE6747181A224800382501 /* Headers */,
-				46CE6733181A17F100382501 /* STLoginDirector.h */,
-				46CE6734181A17F100382501 /* STLoginDirector.m */,
+				46CE6758181A34F200382501 /* Login */,
 				46CE6746181A224200382501 /* Tokens */,
 				46CE6712181A16C200382501 /* Supporting Files */,
 			);
@@ -178,10 +191,34 @@
 		46CE6747181A224800382501 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				46CE6756181A330F00382501 /* STLoginControllerWindowDelegate.h */,
 				46CE6732181A16DB00382501 /* STLoginStates.h */,
 				46CE674C181A227000382501 /* STURLs.h */,
+				46CE674E181A25C000382501 /* STHandlers.h */,
+				46CE675E181A407F00382501 /* STApplicationConstants.h */,
 			);
 			name = Headers;
+			sourceTree = "<group>";
+		};
+		46CE6758181A34F200382501 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				46CE6733181A17F100382501 /* STLoginDirector.h */,
+				46CE6734181A17F100382501 /* STLoginDirector.m */,
+				46CE6750181A309800382501 /* STLoginWindowController.h */,
+				46CE6751181A309800382501 /* STLoginWindowController.m */,
+				46CE6752181A309800382501 /* STLoginWindowController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		46CE675D181A351100382501 /* URL Parser */ = {
+			isa = PBXGroup;
+			children = (
+				46CE6759181A350A00382501 /* STURLParser.h */,
+				46CE675A181A350A00382501 /* STURLParser.m */,
+			);
+			name = "URL Parser";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,10 +228,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46CE6740181A202A00382501 /* STToken.h in Headers */,
+				4664BA6F181A440700DD4B2F /* StolzKit.h in Headers */,
 				46CE6735181A17F100382501 /* STLoginDirector.h in Headers */,
+				46CE6757181A330F00382501 /* STLoginControllerWindowDelegate.h in Headers */,
+				46CE6740181A202A00382501 /* STToken.h in Headers */,
+				46CE674F181A25C000382501 /* STHandlers.h in Headers */,
+				46CE675F181A407F00382501 /* STApplicationConstants.h in Headers */,
+				46CE6753181A309800382501 /* STLoginWindowController.h in Headers */,
 				46CE674D181A227000382501 /* STURLs.h in Headers */,
 				46CE673C181A1FC700382501 /* STTokenManager.h in Headers */,
+				46CE675B181A350A00382501 /* STURLParser.h in Headers */,
 				46CE6744181A21AD00382501 /* STTokenPair.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +288,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Moshe Berman";
+				TargetAttributes = {
+					46CE671A181A16C200382501 = {
+						TestTargetID = 4664BA75181A48B000DD4B2F;
+					};
+				};
 			};
 			buildConfigurationList = 46CE6703181A16C200382501 /* Build configuration list for PBXProject "Stolz" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -280,11 +328,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46CE6754181A309800382501 /* STLoginWindowController.m in Sources */,
+				46CE675C181A350A00382501 /* STURLParser.m in Sources */,
 				46CE6745181A21AD00382501 /* STTokenPair.m in Sources */,
 				46CE6741181A202A00382501 /* STToken.m in Sources */,
 				46CE673D181A1FC700382501 /* STTokenManager.m in Sources */,
 				46CE6736181A17F100382501 /* STLoginDirector.m in Sources */,
-				46CE6716181A16C200382501 /* Stolz.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +440,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Stolz/Stolz-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -407,6 +457,7 @@
 		46CE6730181A16C200382501 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Heissen.framework/Versions/A/Heissen";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -420,6 +471,7 @@
 				);
 				INFOPLIST_FILE = "StolzTests/StolzTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -427,6 +479,7 @@
 		46CE6731181A16C200382501 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Heissen.framework/Versions/A/Heissen";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -436,6 +489,7 @@
 				GCC_PREFIX_HEADER = "Stolz/Stolz-Prefix.pch";
 				INFOPLIST_FILE = "StolzTests/StolzTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -459,6 +513,7 @@
 				46CE672E181A16C200382501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46CE672F181A16C200382501 /* Build configuration list for PBXNativeTarget "StolzTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +522,7 @@
 				46CE6731181A16C200382501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
