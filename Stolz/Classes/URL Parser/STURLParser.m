@@ -10,12 +10,16 @@
 
 @implementation STURLParser
 
+- (NSDictionary *)parametersFromURL:(NSURL *)url
+{
+    return [self parametersFromURL:url usingDelimiter:@"?"];
+}
 /**
  *  This method converts a URL into a string and
  *  parses the parameters it contains.
  */
 
-- (NSDictionary *)parametersFromURL:(NSURL *)url
+- (NSDictionary *)parametersFromURL:(NSURL *)url usingDelimiter:(NSString *)delimiter
 {
     
     /** Prepare a default return value. */
@@ -25,7 +29,7 @@
     NSString *stringRepresentation = [url absoluteString];
     
     /** Check for the location of the query separator. */
-    NSInteger indexOfQuerySeparator = [stringRepresentation rangeOfString:@"?"].location;
+    NSInteger indexOfQuerySeparator = [stringRepresentation rangeOfString:delimiter].location;
     
     /** If it exists and isn't the last character, we have some sort of query string. */
     BOOL urlContainsQueryString =  indexOfQuerySeparator != NSNotFound && (indexOfQuerySeparator+1) != stringRepresentation.length;
@@ -33,7 +37,7 @@
     if(urlContainsQueryString)
     {
         /** Now we attempt to parse the parameters. */
-        NSString *unparsedParameters = [stringRepresentation componentsSeparatedByString:@"?"][1];
+        NSString *unparsedParameters = [stringRepresentation componentsSeparatedByString:delimiter][1];
     
         /** Ensure we have at least one parameter in the query string. */
         BOOL uparsedParametersContainAtLeastOneParameter = [unparsedParameters rangeOfString:@"="].location != NSNotFound;
@@ -70,5 +74,6 @@
     /** Now return. */
     return parameters;
 }
+
 
 @end

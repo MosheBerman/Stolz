@@ -14,11 +14,28 @@
  */
 @interface STURLParser : NSObject
 
-/** 
- *  This method converts a URL into a string and 
+/**
+ *  This method converts a URL into a string and
  *  parses the parameters it contains.
+ *
+ *  @discussion calls parametersFromURL:usingDelimiter: passing in
+ *  a question mark as the delimiter value.
+ *
+ *  @param url The url to parse
+ *
  */
 
 - (NSDictionary *)parametersFromURL:(NSURL *)url;
+
+/** 
+ *  This method converts a URL into a string and 
+ *  parses the parameters it contains.
+ *
+ *  @param url The url to parse
+ *  @param delimiter the delimiter between the url and the query string
+ *
+ */
+
+- (NSDictionary *)parametersFromURL:(NSURL *)url usingDelimiter:(NSString *)delimiter;
 
 @end
