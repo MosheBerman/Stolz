@@ -15,7 +15,7 @@
 /**
  *  The delegate will be informed when the loading changes.
  */
-@property (assign) id<STLoginControllerWindowDelegate> delegate;
+@property (strong) id<STLoginControllerWindowDelegate> delegate;
 
 /**
  *  Loads a specified URL into the browser frame.

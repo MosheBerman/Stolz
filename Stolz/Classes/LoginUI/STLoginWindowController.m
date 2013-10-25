@@ -57,17 +57,26 @@
 - (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
     
-    NSURL *url = [[[[sender mainFrame] provisionalDataSource] request] URL];
+    NSURL *url = [[[frame dataSource] request] URL];
     
     STURLParser *parser = [[STURLParser alloc] init];
     
-    NSDictionary *parameters = [parser parametersFromURL:url];
+    NSDictionary *parameters = [parser parametersFromURL:url usingDelimiter:@"#"];
+    
+    /**
+     *  If the using the hash didn't yield
+     *  the parameter we want, try the default
+     *  query seperator.
+     */
+    if (!parameters[@"access_token"]) {
+        parameters = [parser parametersFromURL:url];
+    }
     
     if ([self delegate]) {
         
         /** If we get a token back, this is optimal. */
-        if (parameters[@"token"]) {
-            [[self delegate] loginController:self didAcquireToken:parameters[@"token"]];
+        if (parameters[@"access_token"]) {
+            [[self delegate] loginController:self didAcquireToken:parameters[@"access_token"] withExpirationInterval:[parameters[@"expires_in"] integerValue]];
         }
         
         /** If we get a code, we've got to do some more things. */
