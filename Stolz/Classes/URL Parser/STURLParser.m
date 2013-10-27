@@ -22,6 +22,10 @@
 - (NSDictionary *)parametersFromURL:(NSURL *)url usingDelimiter:(NSString *)delimiter
 {
     
+    if (!delimiter) {
+        delimiter = @"?";
+    }
+    
     /** Prepare a default return value. */
     NSMutableDictionary *parameters = nil;
     
