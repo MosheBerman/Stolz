@@ -59,41 +59,8 @@
     
     NSURL *url = [[[frame dataSource] request] URL];
     
-    STURLParser *parser = [[STURLParser alloc] init];
-    
-    NSDictionary *parameters = [parser parametersFromURL:url usingDelimiter:@"#"];
-    
-    /**
-     *  If the using the hash didn't yield
-     *  the parameter we want, try the default
-     *  query seperator.
-     */
-    if (!parameters[@"access_token"]) {
-        parameters = [parser parametersFromURL:url];
-    }
-    
     if ([self delegate]) {
-        
-        /** If we get a token back, this is optimal. */
-        if (parameters[@"access_token"]) {
-            [[self delegate] loginController:self didAcquireToken:parameters[@"access_token"] withExpirationInterval:[parameters[@"expires_in"] integerValue]];
-        }
-        
-        /** If we get a code, we've got to do some more things. */
-        else if(parameters[@"code"]) {
-            //  TODO: Implement this later.
-            //  It's not really necessary, since we're targeting token based login.
-            //  This is here as a safety in case Facebook changes things sometime in
-            //  the future.
-        }
-        
-        /** Handle a case where we've failed. */
-        else if (parameters[@"error_reason"]){
-            
-            NSError *error = [NSError errorWithDomain:@"com.mosheberman.facebook.userdenied" code:2 userInfo:parameters];
-            
-            [[self delegate] loginControllerFailedToAcquireToken:self withError:error];
-        }
+        [[self delegate] loginController:self didLoadURL:url];
     }
 }
 
