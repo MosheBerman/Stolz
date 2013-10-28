@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46565C2B181CAA2400582BB4 /* STPermissions.h in Headers */ = {isa = PBXBuildFile; fileRef = 46565C2A181CAA2400582BB4 /* STPermissions.h */; };
 		4664BA6F181A440700DD4B2F /* StolzKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4664BA6E181A440700DD4B2F /* StolzKit.h */; };
 		46CE670C181A16C200382501 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE670B181A16C200382501 /* Cocoa.framework */; };
 		46CE671D181A16C200382501 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CE671C181A16C200382501 /* XCTest.framework */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		46565C2A181CAA2400582BB4 /* STPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STPermissions.h; path = Headers/STPermissions.h; sourceTree = "<group>"; };
 		4664BA6E181A440700DD4B2F /* StolzKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StolzKit.h; path = Stolz/StolzKit.h; sourceTree = "<group>"; };
 		46CE6708181A16C200382501 /* libStolz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStolz.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CE670B181A16C200382501 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -196,6 +198,7 @@
 				46CE674C181A227000382501 /* STURLs.h */,
 				46CE674E181A25C000382501 /* STHandlers.h */,
 				46CE675E181A407F00382501 /* STApplicationConstants.h */,
+				46565C2A181CAA2400582BB4 /* STPermissions.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				46CE675F181A407F00382501 /* STApplicationConstants.h in Headers */,
 				46CE6753181A309800382501 /* STLoginWindowController.h in Headers */,
 				46CE674D181A227000382501 /* STURLs.h in Headers */,
+				46565C2B181CAA2400582BB4 /* STPermissions.h in Headers */,
 				46CE673C181A1FC700382501 /* STTokenManager.h in Headers */,
 				46CE675B181A350A00382501 /* STURLParser.h in Headers */,
 				46CE6744181A21AD00382501 /* STTokenPair.h in Headers */,
