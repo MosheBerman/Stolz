@@ -465,6 +465,6 @@ FacebookPermission PermissionRSVPEvent = @"rsvp_event";
  */
 
 
-FacebookPermission *PermissionManagePages = @"manage_pages";
+FacebookPermission PermissionManagePages = @"manage_pages";
 
 #endif
