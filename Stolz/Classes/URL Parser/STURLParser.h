@@ -34,6 +34,8 @@
  *  @param url The url to parse
  *  @param delimiter the delimiter between the url and the query string
  *
+ *  @return A dictionary of the paramaters in the URL.
+ *
  */
 
 - (NSDictionary *)parametersFromURL:(NSURL *)url usingDelimiter:(NSString *)delimiter;
