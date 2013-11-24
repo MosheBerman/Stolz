@@ -46,7 +46,7 @@
  *  the app token, or admin token.
  */
 
-#define kFacebookTokenInspectionURL @"https://graph.facebook.com/debug_token?input_token=%@&access_token=%@"
+#define kFacebookTokenInspectionURL @"https://graph.facebook.com/debug_token?input_token=%@&access_token=%@|%@"
 
 /**
  *  The URL to convert a short-lived token to a long lived one.
@@ -59,6 +59,6 @@
  *
  */
 
-#define kFacebookDeauthorizeURL @"https://graph.facebook.com/%@/permissions"
+#define kFacebookDeauthorizeURL @"https://graph.facebook.com/%@/permissions?access_token=%@"
 
 #endif
