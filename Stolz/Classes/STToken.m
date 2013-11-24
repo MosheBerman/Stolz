@@ -21,6 +21,7 @@
     
     if (self) {
         
+        _value = [aDecoder decodeObjectForKey:@"value"];
         _expirationDate = [aDecoder decodeObjectForKey:@"expirationDate"];
         _issueDate = [aDecoder decodeObjectForKey:@"issueDate"];
         _machineID = [aDecoder decodeObjectForKey:@"machineID"];
@@ -33,6 +34,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.value forKey:@"value"];
     [aCoder encodeObject:self.expirationDate forKey:@"expirationDate"];
     [aCoder encodeObject:self.issueDate forKey:@"issueDate"];
     [aCoder encodeObject:self.machineID forKey:@"machineID"];
