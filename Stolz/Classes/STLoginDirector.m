@@ -12,7 +12,11 @@
 
 #import "STLoginWindowController.h"
 
+#import "STURLParser.h"
+
 #import "STURLs.h"
+
+#import "STPermissions.h"
 
 @interface STLoginDirector () <STLoginControllerWindowDelegate>
 
@@ -23,9 +27,20 @@
 @property (strong) STTokenManager *tokenManager;
 
 /**
- *  Allows the user to set the application ID. 
+ *  Allows the user to set the application ID.
  */
 @property (strong) NSString *facebookAppID;
+
+/**
+ *  Allows the user to set the application secret.
+ */
+@property (strong) NSString *facebookAppSecret;
+
+/**
+ *  The app's client token
+ */
+
+@property (strong) NSString *clientToken;
 
 /**
  *  An internal login window instance
@@ -42,6 +57,12 @@
  */
 @property (strong) STLoginCompletionBlock logoutCompletion;
 
+/**
+ *  An array of permissions to request.
+ */
+
+@property (strong) NSArray *permissionsToRequest;
+
 @end
 
 @implementation STLoginDirector
@@ -51,8 +72,9 @@
 {
     self = [super init];
     if (self) {
-        
+        _state = STLoginStateLoggedOut;
         _loginWindowController = [[STLoginWindowController alloc] initWithWindowNibName:@"STLoginWindowController"];
+        _tokenManager = [[STTokenManager alloc] init];
     }
     return self;
 }
@@ -114,7 +136,8 @@
      *  Perform the login.
      */
     
-    NSString *loginString = [NSString stringWithFormat:kLoginDialogURL, self.facebookAppID, kRedirectURI];
+    NSString *scope = [NSString stringWithFormat:@"%@,%@", PermissionStream, PermissionUserLikes];
+    NSString *loginString = [NSString stringWithFormat:kFacebookLoginDialogURLWithScope, self.facebookAppID, kFacebookRedirectURI, scope];
     NSURL *loginURL = [NSURL URLWithString:loginString];
     
     /**
@@ -123,28 +146,143 @@
     [[self loginWindowController] setDelegate:self];
     [[self loginWindowController] showWindow:nil];
     [[self loginWindowController] loadURL:loginURL];
-
+    
 }
 
 
 /**
  *  STLoginWindowViewControllerDelegate
- *  TODO: Change this so the web browser 
- *  passes back the URL that it received.
- *  This will make an iOS port easier.
+ *
+ *  This method gets called with the URL that the
+ *  loginWindowController receives
  */
 
-- (void)loginController:(STLoginWindowController *)loginWindowController didAcquireToken:(NSString *)token withExpirationInterval:(NSInteger)interval
+- (void)loginController:(STLoginWindowController *)loginController didLoadURL:(NSURL *)url
+{
+    
+    STURLParser *parser = [[STURLParser alloc] init];
+    
+    NSDictionary *parameters = [parser parametersFromURL:url usingDelimiter:@"#"];
+    
+    /**
+     *  If the using the hash didn't yield
+     *  the parameter we want, try the default
+     *  query seperator.
+     */
+    if (!parameters[@"access_token"]) {
+        parameters = [parser parametersFromURL:url];
+    }
+    
+    /** If we get a token back, this is optimal. */
+    if (parameters[@"access_token"]) {
+
+        /** A flag to store success/failure in. */
+        __block BOOL success = YES;
+        
+        /**
+         *  Save the state.
+         */
+        self.state = success ? STLoginStateLoggedIn : STLoginStateLoggedNotAuthorized;
+        
+        /**
+         *  Before we finish the login process, grab the user's
+         *  ID from Facebook, so we can properly log out.
+         */
+        
+        NSString *formattedString = [NSString stringWithFormat:@"https://graph.facebook.com/me?access_token=%@", parameters[@"access_token"]];
+        NSURL *url = [NSURL URLWithString:formattedString];
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+        
+        [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            
+            
+            if (!error && data) {
+                
+                /** Attempt to read the JSON data into a dictionary. */
+                NSDictionary *validationResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                
+                /** If we've got a dictionary, let's check it out. */
+                if (!error) {
+                    
+                    /**
+                     *  Check for a validation error.
+                     */
+                    
+                    if (validationResponse[@"error"]) {
+                        
+                        [self showErrorAlertWithDictionary:validationResponse[@"error"]];
+                        
+                    }
+                    
+                    /**
+                     *  If there is none, try to parse the data.
+                     */
+                    
+                    else {
+                        
+                        /**
+                         *      Create a token.
+                         */
+                        
+                        STToken *token = [[STToken alloc] init];
+                        [token setValue:parameters[@"access_token"]];
+                        [token setUserID:validationResponse[@"id"]];
+                        
+                        /**
+                         *  Add the token to the token manager
+                         */
+                        
+                        [[self tokenManager] setAppAccessToken:token];
+                        
+                        /**
+                         *  Then call the callback.
+                         */
+                        
+                        if (self.loginCompletion) {
+                            self.loginCompletion(success, self.state);
+                        }
+                        
+                    }
+                    
+                }
+            }
+            
+        }];
+    }
+    
+    /** If we get a code, we've got to do some more things. */
+    else if(parameters[@"code"]) {
+        //  TODO: Implement this later.
+        //  It's not really necessary, since we're targeting token based login.
+        //  This is here as a safety in case Facebook changes things sometime in
+        //  the future.
+    }
+    
+    /** Handle a case where we've failed. */
+    else if (parameters[@"error_reason"]){
+        [self showErrorAlertWithDictionary:parameters[@"error"]];
+    }
+}
+
+/**
+ *
+ */
+
+- (void)processToken:(NSString *)token withExpirationInterval:(NSInteger)interval
 {
     /**
      *  Properly store permissions here.
      */
     
+    NSLog(@"Validating Token: %@", token);
+    
     /** Calculate the expiration date. */
     NSDate *expirationDate = [[NSDate date] dateByAddingTimeInterval:interval];
     
     /** Build a URL to confirm the token's validity. */
-    NSURL *tokenConfirmationURL = [NSURL URLWithString:[NSString stringWithFormat:kTokenInspectionURL, token, self.facebookAppID]];
+    NSString *urlString = [[NSString stringWithFormat:kFacebookTokenInspectionURL, token, self.facebookAppID, self.facebookAppSecret] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURL *tokenConfirmationURL = [NSURL URLWithString:urlString];
     
     /** Put the URL into a request. */
     NSURLRequest *request = [NSURLRequest requestWithURL:tokenConfirmationURL];
@@ -163,39 +301,57 @@
             /** If we've got a dictionary, let's check it out. */
             if (!error) {
                 
-                /** "Unpack" the response from the data wrapper. */
-                validationResponse = validationResponse[@"data"];
-                
-                
                 /**
-                 *  TODO: Store this token in the token manager.
+                 *  Check for a validation error.
                  */
                 
+                if (validationResponse[@"error"]) {
+                    
+                    [self showErrorAlertWithDictionary:validationResponse[@"error"]];
+                    
+                }
+                
                 /**
-                 *  TODO: Read up on long-lived tokens:
-                 *  https://developers.facebook.com/docs/facebook-login/access-tokens/#extending
+                 *  If there is none, try to parse the data.
                  */
                 
+                else {
+                    /** "Unpack" the response from the data wrapper. */
+                    validationResponse = validationResponse[@"data"];
+                    
+                    
+                    
+                    /**
+                     *  TODO: Store this token in the token manager.\
+                     */
+                    
+                    
+                    
+                    /**
+                     *  TODO: Read up on long-lived tokens:
+                     *  https://developers.facebook.com/docs/facebook-login/access-tokens/#extending
+                     */
+                    
+                }
             }
         }
         else {
             success = !error;
         }
         
+        /**
+         *  Save the state.
+         */
+        self.state = success ? STLoginStateLoggedIn : STLoginStateLoggedNotAuthorized;
+        
+        /**
+         *  Then call the callback.
+         */
+        
+        if (self.loginCompletion) {
+            self.loginCompletion(success, self.state);
+        }
     }];
-    
-    /** 
-     *  Save the state.
-     */
-    self.state = success ? STLoginStateLoggedIn : STLoginStateLoggedNotAuthorized;
-    
-    /**
-     *  Then call the callback.
-     */
-    
-    if (self.loginCompletion) {
-        self.loginCompletion(YES, self.state);
-    }
 }
 
 - (void)loginControllerFailedToAcquireToken:(STLoginWindowController *)loginWindowController withError:(NSError *)error
@@ -221,11 +377,24 @@
 - (void)logUserOutWithCompletion:(STLoginCompletionBlock)completion
 {
     
+    NSString *urlString = [NSString stringWithFormat:kFacebookDeauthorizeURL, @""];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"DELETE"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+
+        if (completion) {
+            self.state = STLoginStateLoggedOut;
+            completion(YES, STLoginStateLoggedOut);
+        }
+    }];
 }
 
 /**
  *  Confirming Identity
  */
+
 
 - (void)confirmUserIdentity
 {
@@ -236,5 +405,19 @@
  *  Storing access tokens and login status
  */
 
+/**
+ *  Show an error.
+ */
 
+- (void)showErrorAlertWithDictionary:(NSDictionary *)dictionary
+{
+    
+    NSInteger code = [dictionary[@"code"] integerValue];
+    NSString *message = dictionary[@"message"];
+    NSError *error = [NSError errorWithDomain:message code:code userInfo:dictionary];
+    
+    /** Inform the user that login failed.  */
+    NSAlert *alert = [NSAlert alertWithError:error];
+    [alert runModal];
+}
 @end

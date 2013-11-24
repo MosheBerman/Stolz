@@ -71,4 +71,16 @@
 
 - (void)setFacebookAppID:(NSString *)appID;
 
+/**
+ *  Facebook App Secret
+ */
+
+- (void)setFacebookAppSecret:(NSString *)appSecret;
+
+/**
+ *
+ */
+
+- (void)setClientToken:(NSString *)clientToken;
+
 @end
