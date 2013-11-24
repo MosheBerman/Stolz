@@ -320,13 +320,6 @@
                     validationResponse = validationResponse[@"data"];
                     
                     
-                    
-                    /**
-                     *  TODO: Store this token in the token manager.\
-                     */
-                    
-                    
-                    
                     /**
                      *  TODO: Read up on long-lived tokens:
                      *  https://developers.facebook.com/docs/facebook-login/access-tokens/#extending
@@ -377,7 +370,10 @@
 - (void)logUserOutWithCompletion:(STLoginCompletionBlock)completion
 {
     
-    NSString *urlString = [NSString stringWithFormat:kFacebookDeauthorizeURL, @""];
+    NSString *userID = [[[self tokenManager] appAccessToken] userID];
+    NSString *accessToken = [[[self tokenManager] appAccessToken] value];
+    
+    NSString *urlString = [NSString stringWithFormat:kFacebookDeauthorizeURL, userID, accessToken];
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"DELETE"];
