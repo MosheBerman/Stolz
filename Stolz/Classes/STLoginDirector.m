@@ -57,12 +57,6 @@
  */
 @property (strong) STLoginCompletionBlock logoutCompletion;
 
-/**
- *  An array of permissions to request.
- */
-
-@property (strong) NSArray *permissionsToRequest;
-
 @end
 
 @implementation STLoginDirector
@@ -75,6 +69,7 @@
         _state = STLoginStateLoggedOut;
         _loginWindowController = [[STLoginWindowController alloc] initWithWindowNibName:@"STLoginWindowController"];
         _tokenManager = [[STTokenManager alloc] init];
+        _permissionsToRequest = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -136,7 +131,8 @@
      *  Perform the login.
      */
     
-    NSString *scope = [NSString stringWithFormat:@"%@,%@", PermissionStream, PermissionUserLikes];
+    NSString *scope = [[self permissionsToRequest] componentsJoinedByString:@", "];
+    
     NSString *loginString = [NSString stringWithFormat:kFacebookLoginDialogURLWithScope, self.facebookAppID, kFacebookRedirectURI, scope];
     NSURL *loginURL = [NSURL URLWithString:loginString];
     

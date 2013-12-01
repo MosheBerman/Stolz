@@ -24,6 +24,14 @@
 
 @interface STLoginDirector : NSObject
 
+
+/**
+ *  An array of permissions to request.
+ */
+
+@property (strong) NSMutableArray *permissionsToRequest;
+
+
 /**
  *  @return a singleton login director instance
  */
@@ -92,5 +100,6 @@
  */
 
 - (void)setClientToken:(NSString *)clientToken;
+
 
 @end

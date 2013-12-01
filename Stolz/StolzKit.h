@@ -10,5 +10,6 @@
 #define Stolz_StolzKit_h
 
 #import "STLoginDirector.h"
+#import "STPermissions.h"
 
 #endif
