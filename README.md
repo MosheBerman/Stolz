@@ -2,7 +2,7 @@ Stolz
 =====
 
 Stolz is a library for handling Facebook login on OS X. 
-Stoltz is the German word for "pride", and it's pronounced sh-toe-lts. 
+Stolz is the German word for "pride", and it's pronounced sh-toe-lts. 
 
 Facebook has SDKs for iOS, Android, and the Web, but they don't have anything for OS X. So, I wrote something.
 
