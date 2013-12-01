@@ -49,7 +49,8 @@ I haven't done it because Facebook probably wants you iOS developers to use thei
 
 License:
 ---
-MIT. 
+MIT
+
 
 Contact:
 ---
