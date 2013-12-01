@@ -52,6 +52,8 @@
     [[self loginDirector] setFacebookAppSecret:@""];
     [[self loginDirector] setClientToken:@""];
     
+    [[[self loginDirector] permissionsToRequest] addObjectsFromArray:@[PermissionUserStatus]];
+    
     [self.loginDirector logUserInWithCompletion:^(BOOL success, enum STLoginState state) {
         
         if (success) {
