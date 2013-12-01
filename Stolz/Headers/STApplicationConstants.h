@@ -10,5 +10,6 @@
 #define Stolz_STApplicationConstants_h
 
 #define kFacebookApplicationID @""
+#define kFacebookClientToken @""
 
 #endif
