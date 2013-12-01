@@ -16,8 +16,6 @@
 
 #import "STURLs.h"
 
-#import "STPermissions.h"
-
 @interface STLoginDirector () <STLoginControllerWindowDelegate>
 
 /** Stores the user's login state. */
@@ -131,7 +129,14 @@
      *  Perform the login.
      */
     
-    NSString *scope = [[self permissionsToRequest] componentsJoinedByString:@", "];
+    NSString *scope = [[self permissionsToRequest] componentsJoinedByString:@","];
+
+    NSString *baseURL = kFacebookLoginDialogURL;
+    
+    /* If there are permissions to request, use the scope URL. */
+    if ([[self permissionsToRequest] count]) {
+        baseURL = kFacebookLoginDialogURLWithScope;
+    }
     
     NSString *loginString = [NSString stringWithFormat:kFacebookLoginDialogURLWithScope, self.facebookAppID, kFacebookRedirectURI, scope];
     NSURL *loginURL = [NSURL URLWithString:loginString];
@@ -191,6 +196,7 @@
         
         [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             
+            [[self loginWindowController] close];
             
             if (!error && data) {
                 
