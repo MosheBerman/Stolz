@@ -54,31 +54,41 @@
 - (BOOL)isUserAuthorized;
 
 /**
- *  Logging people in
+ *  Logging a user in.
+ *
+ *  @param completion A completion block to execute after the login is finished.
  */
 
 - (void)logUserInWithCompletion:(STLoginCompletionBlock)completion;
 
 /**
- *  Logging people out
+ *  Logging a user out.
+ *
+ *  @param completion A completion block to execute after the login is finished.
  */
 
 - (void)logUserOutWithCompletion:(STLoginCompletionBlock)completion;
 
 /**
  *  Facebook App ID
+ *
+ *  @param appID Your Facebook app ID.
  */
 
 - (void)setFacebookAppID:(NSString *)appID;
 
 /**
  *  Facebook App Secret
+ *
+ *  @param appSecret Your Facebook app secret key.
  */
 
 - (void)setFacebookAppSecret:(NSString *)appSecret;
 
 /**
+ *  Sets the Facebook client token.
  *
+ *  @param clientToken Your Facebook app client token.
  */
 
 - (void)setClientToken:(NSString *)clientToken;
