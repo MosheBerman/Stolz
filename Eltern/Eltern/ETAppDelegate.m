@@ -41,11 +41,17 @@
 #pragma mark - Login/Logout
 
 /**
+ *  This method invokes a login.
  *
+ *  @discussion This is where you'd set up your Facebook keys.
  */
 
 - (void)logIn {
-    [[self loginDirector] setFacebookAppID:@"191646724354232"];
+
+    [[self loginDirector] setFacebookAppID:@""];
+    [[self loginDirector] setFacebookAppSecret:@""];
+    [[self loginDirector] setClientToken:@""];
+    
     [self.loginDirector logUserInWithCompletion:^(BOOL success, enum STLoginState state) {
         
         if (success) {
@@ -67,7 +73,17 @@
 
 - (void)logOut
 {
-    
+    [[self loginDirector] logUserOutWithCompletion:^(BOOL success, enum STLoginState state) {
+        if ([self.loginDirector isUserLoggedIn]) {
+            self.loginLabel.stringValue = NSLocalizedString(@"You are logged in.", @"A label for reporting that a user is logged in, without the username.");
+            self.loginButton.title = NSLocalizedString(@"Log Out", @"A label for as button to log out.");
+            
+        }
+        else {
+            self.loginLabel.stringValue = NSLocalizedString(@"You are not logged in.", @"A label for reporting that a user is logged out.");
+            self.loginButton.title = NSLocalizedString(@"Log In", @"A label for as button to log in.");
+        }
+    }];
 }
  
 @end
