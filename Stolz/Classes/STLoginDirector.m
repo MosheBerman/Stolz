@@ -300,8 +300,8 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
 
         if (completion) {
-            self.state = STLoginStateLoggedOut;
-            completion(YES, STLoginStateLoggedOut);
+            self.state = STLoginStateLoggedNotAuthorized;
+            completion(YES, STLoginStateLoggedNotAuthorized);
         }
     }];
 }
