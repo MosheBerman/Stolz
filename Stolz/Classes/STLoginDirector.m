@@ -109,7 +109,7 @@
 
 - (BOOL)isUserAuthorized
 {
-    return (_state != STLoginStateLoggedNotAuthorized);
+    return (_state != STLoginStateNotAuthorized);
 }
 
 /**
@@ -183,7 +183,7 @@
         /**
          *  Save the state.
          */
-        self.state = success ? STLoginStateLoggedIn : STLoginStateLoggedNotAuthorized;
+        self.state = success ? STLoginStateLoggedIn : STLoginStateNotAuthorized;
         
         /**
          *  Before we finish the login process, grab the user's
@@ -300,8 +300,8 @@
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
 
         if (completion) {
-            self.state = STLoginStateLoggedNotAuthorized;
-            completion(YES, STLoginStateLoggedNotAuthorized);
+            self.state = STLoginStateNotAuthorized;
+            completion(YES, STLoginStateNotAuthorized);
         }
     }];
 }

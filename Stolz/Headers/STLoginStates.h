@@ -12,7 +12,7 @@
 NS_ENUM(NSInteger, STLoginState) {
     STLoginStateLoggedIn,
     STLoginStateLoggedOut,
-    STLoginStateLoggedNotAuthorized
+    STLoginStateNotAuthorized
 };
 
 #endif
