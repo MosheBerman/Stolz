@@ -26,7 +26,7 @@ There's this handy class called `LoginDirector`. It's a singleton, and you'll ha
 	[[self loginDirector] setClientToken:@""];
 
 Now, you can call the log in and log out methods. 
-`logUserInWithCompletion:` and `logUserOutWithCompletion:`. The completion blocks will allow you to do what you want to do.
+`logUserInWithCompletion:` and `logUserOutWithCompletion:`. The completion blocks will allow you to do what you want to do after the login state changes.
 
 
 Login Permissions:
